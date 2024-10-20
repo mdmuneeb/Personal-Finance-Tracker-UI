@@ -1,0 +1,65 @@
+<section class="w-100" style="background-color: black; height: 100vh;">
+  <h1 class="text-white fw-bold fs-1 pt-1 ps-5">PFT</h1>
+  <div class="d-flex justify-content-center align-items-center flex-wrap">
+    <div class="text-white col-lg-4">
+      <h2>Do money differently.</h2>
+      <p>PFT has helped millions learn to spend, save, and live joyfully with a simple set of life-changing habits.</p>
+    </div>
+    <div class="text-white col-lg-6" >
+      <div class="section">
+        <div class="container">
+          <div class="row justify-content-center">
+            <div class="col-12 text-center align-self-center py-5">
+              <div class="section pb-5 pt-5 pt-sm-2 text-center">
+                <h6 class="mb-0 pb-3"><span>Log In </span><span>Sign Up</span></h6>
+                      <input class="checkbox" type="checkbox" id="reg-log" name="reg-log"/>
+                      <label for="reg-log"></label>
+                <div class="card-3d-wrap mx-auto">
+                  <div class="card-3d-wrapper">
+                    <div class="card-front">
+                      <div class="center-wrap">
+                        <div class="section text-center" [formGroup]="LoginForm">
+                          <h4 class="mb-4 pb-3">Log In</h4>
+                          <div class="form-group">
+                            <input type="email" name="logemail" formControlName="LEmail" class="form-style" placeholder="Your Email" id="logemail" autocomplete="off">
+                            <label id="icon" class="input-icon" for="password"><i class="fa-solid fa-envelope"></i></label>
+                          </div>
+                          <div class="form-group mt-2">
+                            <input type="password" name="logpass" formControlName="LPassword" class="form-style" placeholder="Your Password" id="logpass" autocomplete="off">
+                            <label id="icon" class="input-icon" for="password"><i class="fa-solid fa-lock"></i></label>
+                          </div>
+                          <button (click)="LoginUser()" class="btn mt-4">submit</button>
+                                        <p class="mb-0 mt-4 text-center"><a href="#0" class="link">Forgot your password?</a></p>
+                            </div>
+                          </div>
+                        </div>
+                    <div class="card-back">
+                      <div class="center-wrap">
+                        <div class="section text-center"  [formGroup]="RegisterForm">
+                          <h4 class="mb-4 pb-3">Sign Up</h4>
+                          <div class="form-group">
+                            <input type="text" name="logname" class="form-style" placeholder="Your Full Name" formControlName="UserName" id="logname" autocomplete="off">
+                            <label id="icon" class="input-icon" for="password"><i class="fa fa-user"></i></label>
+                          </div>
+                          <div class="form-group mt-2">
+                            <input type="email" name="logemail" formControlName="Email" class="form-style" placeholder="Your Email" id="logemail" autocomplete="off">
+                            <label id="icon" class="input-icon" for="password"><i class="fa-solid fa-envelope"></i></label>
+                          </div>
+                          <div class="form-group mt-2">
+                            <input type="password" name="logpass" formControlName="Password" class="form-style" placeholder="Your Password" id="logpass" autocomplete="off">
+                            <label id="icon" class="input-icon" for="password"><i class="fa-solid fa-lock"></i></label>
+                          </div>
+                          <button class="btn mt-4" (click)="SignUpUser()">submit</button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+          </div>
+      </div>
+    </div>
+  </div>
+</section>
