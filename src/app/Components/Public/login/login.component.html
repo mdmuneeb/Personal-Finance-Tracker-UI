@@ -28,7 +28,10 @@
                             <input type="password" name="logpass" formControlName="LPassword" class="form-style" placeholder="Your Password" id="logpass" autocomplete="off">
                             <label id="icon" class="input-icon" for="password"><i class="fa-solid fa-lock"></i></label>
                           </div>
-                          <button (click)="LoginUser()" class="btn mt-4">submit</button>
+                          <button (click)="LoginUser()" class="btn mt-4" [disabled]="IsLoading">
+                            <span *ngIf="IsLoading" class="spinner-border spinner-border-sm mx-2" role="status" aria-hidden="true"></span>
+                            <span>{{IsLoading? "Loading...": "Submit"}}</span>
+                          </button>
                                         <p class="mb-0 mt-4 text-center"><a href="#0" class="link">Forgot your password?</a></p>
                             </div>
                           </div>
@@ -49,7 +52,10 @@
                             <input type="password" name="logpass" formControlName="Password" class="form-style" placeholder="Your Password" id="logpass" autocomplete="off">
                             <label id="icon" class="input-icon" for="password"><i class="fa-solid fa-lock"></i></label>
                           </div>
-                          <button class="btn mt-4" (click)="SignUpUser()">submit</button>
+                          <button class="btn mt-4" (click)="SignUpUser()">
+                            <span *ngIf="IsLoading" class="spinner-border spinner-border-sm mx-2" role="status" aria-hidden="true"></span>
+                            <span>{{IsLoading? "Loading...": "Submit"}}</span>
+                          </button>
                             </div>
                           </div>
                         </div>

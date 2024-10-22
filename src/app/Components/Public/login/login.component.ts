@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { LoginServiceService } from '../../../Services/login-service.service';
 import { HttpClientModule } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -15,7 +16,12 @@ export class LoginComponent implements OnInit {
 
   LoginForm!: FormGroup;
   RegisterForm!: FormGroup;
-  constructor(private loginService: LoginServiceService){}
+  signUpResult!:any;
+  loginResult!: any;
+  IsLoading!: any;
+  constructor(private loginService: LoginServiceService,
+    private router: Router
+  ){}
   ngOnInit(): void {
     this.LoginForm = new FormGroup({
       LEmail: new FormControl(null, [Validators.required]),
@@ -36,23 +42,35 @@ export class LoginComponent implements OnInit {
       this.loginService.RegisterUser(this.RegisterForm.value).
       subscribe({
         next:(res)=>{
-          console.log(res);
+          this.signUpResult = res
+          if(this.signUpResult.IsSuccess){
+            console.log(res);
+          }
         }
       })
     }
   }
 
+
+
   LoginUser(){
+    this.IsLoading = true
     console.log(this.LoginForm.value);
     if(this.LoginForm.valid){
       this.loginService.LoginUser(this.LoginForm.value).
       subscribe({
         next: (res)=>{
           console.log(res);
-          sessionStorage.setItem("userData", JSON.stringify(res))
+            sessionStorage.setItem("userData", JSON.stringify(res))
+            this.IsLoading = false
+            this.LoginForm.reset()
+            this.router.navigate(["/UserPage"])
+        },
+        error: (err)=>{
+          console.log("Error", err);
+          this.IsLoading = false
         }
       })
     }
-
   }
 }

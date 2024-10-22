@@ -1,0 +1,51 @@
+
+
+
+create table Transactions (
+	TransactionId int identity(1,1) Primary key,
+	UserId int null,
+	CategoryId int null,
+	Amount int null,
+	TransactionTypeId int null,
+	TransactionDate varchar(max) null,
+	Description varchar(max) null,
+	UpdatedDate varchar(max) null,
+	DeletedDate varchar(max) null,
+	DeleteTransaction bit null
+)
+
+create Table CategoriesType (
+	CategoryId int identity(1,1) Primary key,
+	CategoryName varchar(max) null,
+)
+
+create Table TransactionType (
+	TransactionTypeId int identity(1,1) Primary key,
+	TransactionName varchar(max) null,
+)
+
+create Table Goals (
+	GoalId int identity(1,1) Primary key,
+	UserId int null,
+	GoalName varchar(max) null,
+	Deadlline varchar(max) null,
+	CreatedDate varchar(max) null,
+	UpdatedDate varchar(max) null,
+	DeletedDate varchar(max) null,
+	DeleteTransaction bit DEFAULT 0
+)
+
+create Table RepeatedTransaction(
+	Id int identity(1,1) Primary key,
+	UserId int null,
+	CategoryId int null,
+	Amount int null,
+	TransactionTypeId int null,
+	TransactionDate varchar(max) null,
+	Description varchar(max) null,
+	UpdatedDate varchar(max) null,
+	Frequency varchar(max) null,
+	DeletedDate varchar(max) null,
+	DeleteTransaction bit null
+)
+
