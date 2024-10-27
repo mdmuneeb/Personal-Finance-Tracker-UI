@@ -64,7 +64,7 @@ export class LoginComponent implements OnInit {
             sessionStorage.setItem("userData", JSON.stringify(res))
             this.IsLoading = false
             this.LoginForm.reset()
-            this.router.navigate(["/UserPage"])
+            this.router.navigate(["/UserPage/dashboard"])
         },
         error: (err)=>{
           console.log("Error", err);

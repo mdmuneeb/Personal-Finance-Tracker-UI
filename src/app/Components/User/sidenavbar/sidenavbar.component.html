@@ -1,38 +1,25 @@
-<nav>
-  <div class="logo">
-    <i class="bx bx-menu menu-icon" (click)="toggleNavBar()"></i>
-    <span class="logo-name">CodingLab</span>
-  </div>
-  <div class="sidebar">
-    <div class="logo">
-      <i class="bx bx-menu menu-icon" (click)="toggleNavBar()"></i>
-      <span class="logo-name">CodingLab</span>
-    </div>
-    <div class="sidebar-content">
-      <ul class="lists">
-        <li class="list">
-          <a href="#" class="nav-link">
-            <i class="bx bx-home-alt icon"></i>
-            <span class="link">Dashboard</span>
-          </a>
-        </li>
-        <!-- Add other menu items as necessary -->
+<input type="checkbox" id="check">
+    <label for="check">
+      <i class="fas fa-bars" id="btn"></i>
+      <i class="fas fa-times" id="cancel"></i>
+    </label>
+    <div class="sidebar">
+      <header><i class="fa-solid fa-coins"></i> PFT</header>
+      <ul>
+        <li><a href="UserPage/dashboard"><i class="fas fa-qrcode"></i>Dashboard</a></li>
+        <li><a href="UserPage/transactionForm"><i class="fas fa-link"></i>Add Trans</a></li>
+        <li><a href="UserPage/transactionData"><i class="fas fa-stream"></i>History</a></li>
+        <li><a href="#"><i class="fas fa-calendar-week"></i>Events</a></li>
+        <li><a href="#"><i class="far fa-question-circle"></i>About</a></li>
+        <li><a href="#"><i class="fas fa-sliders-h"></i>Services</a></li>
+        <li><a href="#"><i class="far fa-envelope"></i>Contact</a></li>
       </ul>
-      <div class="bottom-content">
-        <li class="list">
-          <a href="#" class="nav-link">
-            <i class="bx bx-cog icon"></i>
-            <span class="link">Settings</span>
-          </a>
-        </li>
-        <li class="list">
-          <a href="#" class="nav-link">
-            <i class="bx bx-log-out icon"></i>
-            <span class="link">Logout</span>
-          </a>
-        </li>
-      </div>
+   </div>
+   <section>
+    <div class="d-flex justify-content-between px-5 align-items-center first-section" >
+      <h2 class="fs-3 fw-bold">Welcome {{Name}}</h2>
+      <img src="https://cdn.pixabay.com/photo/2020/07/01/12/58/icon-5359553_640.png" class="image pe-3" alt="">
     </div>
-  </div>
-</nav>
-<section class="overlay" (click)="closeNavBar()"></section>
+    <router-outlet></router-outlet>
+   </section>
+

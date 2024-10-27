@@ -1,0 +1,59 @@
+<section class="dashboard">
+  <div class="d-flex justify-content-around mt-3">
+    <div class="card flex justify-content-center mt-3 me-3">
+      <p-card header="Available Balance" class="p-4 fs-2 fw-semibold">
+        <p class="m-0 fs-5 fw-medium">= {{availableBalance}}</p>
+      </p-card>
+    </div>
+    <div class="card flex justify-content-center mt-3 me-3">
+      <p-card header="Total Income" class="p-4 fs-2 fw-semibold">
+        <p class="m-0 fs-5 fw-medium">= {{totalIncome}}</p>
+      </p-card>
+    </div>
+    <div class="card flex justify-content-center mt-3 me-3">
+      <p-card header="Total Expense" class="p-4 fs-2 fw-semibold">
+        <p class="m-0 fs-5 fw-medium">= {{totalExpense}}</p>
+      </p-card>
+    </div>
+
+  </div>
+
+  <!-- Area Chart -->
+  <div id="chart" class="me-5 mt-5 ">
+    <h2 class="text-center text-decoration-underline">Day by day Transactions Update</h2>
+    <apx-chart
+      [series]="chartOptions.series"
+      [chart]="chartOptions.chart"
+      [xaxis]="chartOptions.xaxis"
+      [dataLabels]="chartOptions.dataLabels"
+      [yaxis]="chartOptions.yaxis"
+      [colors]="chartOptions.colors"
+      [legend]="chartOptions.legend"
+      [fill]="chartOptions.fill"
+    ></apx-chart>
+  </div>
+
+
+  <!-- Income and Expense Pie Charts -->
+  <div class="d-flex justify-content-between mt-5">
+    <div id="chartIncome" class="d-flex justify-content-center">
+      <h2 class="text-center text-decoration-underline">Income</h2>
+      <apx-chart
+        [series]="chartOptionsIncome.series2"
+        [chart]="chartOptionsIncome.chart"
+        [labels]="chartOptionsIncome.labels"
+        [responsive]="chartOptionsIncome.responsive"
+      ></apx-chart>
+    </div>
+
+    <div id="chartExpense" class="d-flex justify-content-center">
+      <h2 class="text-center text-decoration-underline">Expense</h2>
+      <apx-chart
+        [series]="chartOptionsExpense.series2"
+        [chart]="chartOptionsExpense.chart"
+        [labels]="chartOptionsExpense.labels"
+        [responsive]="chartOptionsExpense.responsive"
+      ></apx-chart>
+    </div>
+  </div>
+</section>

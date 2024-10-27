@@ -1,26 +1,26 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { RouterModule } from '@angular/router';
+import { CommonServiceService } from '../../../Services/Common/common-service.service';
 
 @Component({
   selector: 'app-sidenavbar',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterModule],
   templateUrl: './sidenavbar.component.html',
-  styleUrls: ['./sidenavbar.component.scss'] // Change this line
+  styleUrls: ['./sidenavbar.component.scss']
 })
-export class SidenavbarComponent {
-  toggleNavBar() {
-    const navBar = document.querySelector('nav');
-    if (navBar) {
-      navBar.classList.toggle('open');
-    }
+export class SidenavbarComponent implements OnInit{
+  constructor(
+    private commonService: CommonServiceService
+  ){}
+  Name!:any;
+
+  ngOnInit(): void {
+    this.Name =this.commonService.getUserName()
+    console.log(this.Name);
+
   }
 
-  // Function to close the navbar
-  closeNavBar() {
-    const navBar = document.querySelector('nav');
-    if (navBar) {
-      navBar.classList.remove('open');
-    }
-  }
+
 }
