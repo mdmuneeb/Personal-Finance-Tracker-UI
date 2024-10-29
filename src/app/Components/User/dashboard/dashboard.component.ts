@@ -186,6 +186,9 @@ export class DashboardComponent implements OnInit {
         if (this.chartOptions && this.chartOptions.series ) {
             this.chartOptions.series[0].data = incomeData; // Set income data
             this.chartOptions.series[1].data = expenseData; // Set expense data
+            if(this.chartOptions.xaxis){
+              this.chartOptions.xaxis.categories = dates;
+            }
 
             // Set x-axis categories
             this.chartOptions.xaxis = {

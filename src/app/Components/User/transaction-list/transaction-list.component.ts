@@ -6,18 +6,18 @@ import { EditTransactionComponent } from './edit-transaction/edit-transaction.co
 import { CommonModule } from '@angular/common';
 import { CategoryServiceService } from '../../../Services/Category/category-service.service';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { ToastrModule } from 'ngx-toastr';
-import { ToastrService } from 'ngx-toastr';
-
+import { ToastrModule, ToastrService } from 'ngx-toastr';
+import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
+import { DynamicDialogModule } from 'primeng/dynamicdialog';
 
 
 @Component({
   selector: 'app-transaction-list',
   standalone: true,
-  imports: [TableModule, CommonModule, ReactiveFormsModule, ToastrModule],
+  imports: [TableModule, CommonModule, ReactiveFormsModule, ToastrModule ],
   templateUrl: './transaction-list.component.html',
   styleUrl: './transaction-list.component.scss',
-  providers: [ToastrService],
+  providers: [ToastrService, DialogService],
   encapsulation: ViewEncapsulation.None
 })
 export class TransactionListComponent implements OnInit{
@@ -29,11 +29,14 @@ export class TransactionListComponent implements OnInit{
   singleData!:any;
   categoryTypeUpdate = false;
 
+  ref: DynamicDialogRef | undefined;
+
   constructor(private transactionService: TransactionServiceService,
     private commonService: CommonServiceService,
     private CategoryService: CategoryServiceService,
     private transactioService: TransactionServiceService,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    public dialogService: DialogService
   ){ }
   transactionList!:any;
   ngOnInit(): void {
@@ -179,6 +182,7 @@ export class TransactionListComponent implements OnInit{
     subscribe({
       next:(res)=>{
         console.log(res);
+        this.toastr.success('Deleted!', 'Your Transaction Has Successfully Deleted!');
         this.getTransactionsById();
       },
       error: (err)=>{
@@ -187,4 +191,21 @@ export class TransactionListComponent implements OnInit{
 
     })
   }
+
+  openEditDialog(data:any) {
+    this.ref = this.dialogService.open(EditTransactionComponent,
+      { header: 'Edit Transaction',
+        width: '50vw',
+            modal:true,
+            breakpoints: {
+                '960px': '75vw',
+                '640px': '90vw'
+            },
+            data: {
+              TData: data,
+              getTransaction: this.getTransactionsById.bind(this)
+          },
+          styleClass: 'custom-dialog-header'
+      });
+}
 }

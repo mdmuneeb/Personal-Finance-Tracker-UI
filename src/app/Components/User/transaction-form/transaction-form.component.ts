@@ -2,7 +2,7 @@ import { CommonModule, DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CategoryServiceService } from '../../../Services/Category/category-service.service';
-import { HttpClientModule } from '@angular/common/http';
+import {} from '@angular/common/http';
 import { CommonServiceService } from '../../../Services/Common/common-service.service';
 import { TransactionServiceService } from '../../../Services/Transaction/transaction-service.service';
 import { ToastrModule, ToastrService } from 'ngx-toastr';
@@ -10,7 +10,7 @@ import { ToastrModule, ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-transaction-form',
   standalone: true,
-  imports: [ReactiveFormsModule, CommonModule, HttpClientModule, ToastrModule],
+  imports: [ReactiveFormsModule, CommonModule, ToastrModule],
   providers: [DatePipe, ToastrService],
   templateUrl: './transaction-form.component.html',
   styleUrl: './transaction-form.component.scss'
