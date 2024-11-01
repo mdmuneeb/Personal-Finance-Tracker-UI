@@ -26,4 +26,7 @@ export class TransactionServiceService {
   getTransactionByUserIdTransactionId(userId:number, transactionId:number):Observable<any>{
     return this.http.get(`${environment.BASEURL}/Transaction/GetTransactionByUserIdTransactionId/${userId}/${transactionId}`)
   }
+  deletetransaction(Tid:any, UserId:any){
+    return this.http.delete(`${environment.BASEURL}/Transaction/DeleteTransactionPermanent/${UserId}/${Tid}`)
+  }
 }

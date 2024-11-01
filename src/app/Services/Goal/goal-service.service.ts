@@ -24,5 +24,8 @@ export class GoalServiceService {
     return this.http.get(`${environment.BASEURL}/Goal/GetAllGoalbyUserId/${id}`)
   }
 
+  deleteGoal(Gid:any, UserId:any){
+    return this.http.delete(`${environment.BASEURL}/Goal/DeleteGoalPermanently/${Gid}/${UserId}`);
+  }
 }
 

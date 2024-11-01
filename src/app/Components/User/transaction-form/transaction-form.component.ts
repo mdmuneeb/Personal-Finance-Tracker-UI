@@ -20,7 +20,8 @@ export class TransactionFormComponent implements OnInit{
   transactionForm!: FormGroup;
   incomeCategory!:any;
   expenseCategory!:any;
-  categoryType = false;
+  categoryTypeIncome = true;
+  categoryTypeExpense = false;
   IsLoading = false;
 
   constructor(private CategoryService: CategoryServiceService, private commonService: CommonServiceService, private transactioService: TransactionServiceService,
@@ -63,8 +64,16 @@ export class TransactionFormComponent implements OnInit{
     })
   }
 
-  changeType(){
-    this.categoryType = !this.categoryType
+  changeType(type:any){
+    switch(type){
+      case "Income":
+        this.categoryTypeIncome = true;
+        this.categoryTypeExpense = false;
+        break
+      case "Expense":
+        this.categoryTypeExpense = true;
+        this.categoryTypeIncome = false;
+    }
   }
 
   getcategoryIncome(){

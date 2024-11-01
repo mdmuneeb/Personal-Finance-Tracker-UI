@@ -8,6 +8,8 @@ import { TransactionFormComponent } from './Components/User/transaction-form/tra
 import { TransactionListComponent } from './Components/User/transaction-list/transaction-list.component';
 import { GoalTransactionComponent } from './Components/User/goal-transaction/goal-transaction.component';
 import { RepeatedTransactionComponent } from './Components/User/repeated-transaction/repeated-transaction.component';
+import { DeletedTransactionComponent } from './Components/User/transaction-list/deleted-transaction/deleted-transaction.component';
+import { DeletedGoalComponent } from './Components/User/goal-transaction/deleted-goal/deleted-goal.component';
 
 export const routes: Routes = [
   {path: 'loginPage', component: LoginComponent},
@@ -21,6 +23,8 @@ export const routes: Routes = [
       {path: 'transactionData', component: TransactionListComponent},
       {path: 'goalPage', component: GoalTransactionComponent},
       {path: 'repeatedTask', component: RepeatedTransactionComponent},
+      {path: 'deletedTransaction', component: DeletedTransactionComponent},
+      {path: 'deletedGoal', component: DeletedGoalComponent},
     ]
   }
 
