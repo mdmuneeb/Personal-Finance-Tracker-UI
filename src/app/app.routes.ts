@@ -12,6 +12,7 @@ import { DeletedTransactionComponent } from './Components/User/transaction-list/
 import { DeletedGoalComponent } from './Components/User/goal-transaction/deleted-goal/deleted-goal.component';
 
 export const routes: Routes = [
+  {path: '', component: LoginComponent},
   {path: 'loginPage', component: LoginComponent},
   {path: 'landingPage', component: LandingPageComponent},
   {path: 'UserPage', component: UserLayoutComponent},

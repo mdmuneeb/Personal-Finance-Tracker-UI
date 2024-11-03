@@ -1,6 +1,6 @@
 import { HttpErrorResponse, HttpInterceptorFn } from '@angular/common/http';
 import { inject } from '@angular/core';
-import { Router } from 'express';
+import { Router } from '@angular/router';
 import { catchError, throwError } from 'rxjs';
 
 export const loggerInterceptor: HttpInterceptorFn = (req, next) => {

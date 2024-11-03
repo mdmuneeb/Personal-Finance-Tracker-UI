@@ -3,13 +3,15 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { LoginServiceService } from '../../../Services/login-service.service';
 import { Router } from '@angular/router';
+import { ToastrModule, ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, ToastrModule],
   templateUrl: './login.component.html',
-  styleUrl: './login.component.scss'
+  styleUrl: './login.component.scss',
+  providers:[ToastrService]
 })
 export class LoginComponent implements OnInit {
 
@@ -19,7 +21,8 @@ export class LoginComponent implements OnInit {
   loginResult!: any;
   IsLoading!: any;
   constructor(private loginService: LoginServiceService,
-    private router: Router
+    private router: Router,
+    private toaster: ToastrService
   ){}
   ngOnInit(): void {
     this.LoginForm = new FormGroup({
@@ -42,8 +45,12 @@ export class LoginComponent implements OnInit {
       subscribe({
         next:(res)=>{
           this.signUpResult = res
-          if(this.signUpResult.IsSuccess){
+          console.log(res);
+
+          if(this.signUpResult.isSuccess){
             console.log(res);
+            this.toaster.success('You have successfully signup', 'Sucess!!')
+            this.RegisterForm.reset();
           }
         }
       })
@@ -70,6 +77,10 @@ export class LoginComponent implements OnInit {
           this.IsLoading = false
         }
       })
+    }
+    else{
+      console.log("The form is not valid");
+
     }
   }
 }

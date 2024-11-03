@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { CommonServiceService } from '../../../Services/Common/common-service.service';
 
 @Component({
@@ -12,14 +12,19 @@ import { CommonServiceService } from '../../../Services/Common/common-service.se
 })
 export class SidenavbarComponent implements OnInit{
   constructor(
-    private commonService: CommonServiceService
+    private commonService: CommonServiceService,
+    private router: Router
   ){}
   Name!:any;
 
   ngOnInit(): void {
     this.Name =this.commonService.getUserName()
     console.log(this.Name);
+  }
 
+  logOut(){
+    sessionStorage.removeItem("userData");
+    this.router.navigate(['/loginPage'])
   }
 
 

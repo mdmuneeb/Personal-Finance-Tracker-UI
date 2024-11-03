@@ -95,7 +95,7 @@
             <td>{{ product.updatedDate? product.updatedDate: '-' }}</td>
             <td><button class="btn btn-success" (click)="EditGoal(product)">Edit</button></td>
             <td><button class=" btn btn-danger" (click)="deleteGoal(product)">Delete</button></td>
-            <td><button type="button" class="btn btn-secondary" (click)="Done(product)">Done</button></td>
+            <td><button type="button" class="btn btn-secondary" (click)="Done(product)" [disabled]="true">Done</button></td>
         </tr>
     </ng-template>
 </p-table>

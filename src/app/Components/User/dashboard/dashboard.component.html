@@ -1,5 +1,5 @@
 <section class="dashboard">
-  <div class="d-flex justify-content-around mt-3">
+  <div class="d-flex flex-wrap justify-content-around mt-3">
     <!-- <div class="card flex justify-content-center mt-3 me-3">
       <p-card header="Available Balance" class="p-4 fs-2 fw-semibold">
         <p class="m-0 fs-5 fw-medium">= {{availableBalance}}</p>
@@ -16,7 +16,7 @@
       </p-card>
     </div> -->
 
-    <div class="d-flex justify-content-around gap-2" style="width: 85rem;">
+    <div class="d-flex flex-wrap justify-content-around gap-2" style="width: 85rem;">
       <div class="card flex justify-content-center ">
         <p-card header="Available Balance">
             <p class="m-0 fs-5 fw-medium">
@@ -59,8 +59,8 @@
 
 
   <!-- Income and Expense Pie Charts -->
-  <div class="d-flex justify-content-between mt-5">
-    <div id="chartIncome" class="d-flex justify-content-center">
+  <div class="d-flex flex-wrap justify-content-between mt-5">
+    <div id="chartIncome" class="d-flex justify-content-center flex-column" style="width: 100%; height: auto;">
       <h2 class="text-center text-decoration-underline">Income</h2>
       <apx-chart
         [series]="chartOptionsIncome.series2"
@@ -70,7 +70,7 @@
       ></apx-chart>
     </div>
 
-    <div id="chartExpense" class="d-flex justify-content-center">
+    <div id="chartExpense" class="d-flex justify-content-center flex-column" style="width: 100%; height: auto;">
       <h2 class="text-center text-decoration-underline">Expense</h2>
       <apx-chart
         [series]="chartOptionsExpense.series2"
