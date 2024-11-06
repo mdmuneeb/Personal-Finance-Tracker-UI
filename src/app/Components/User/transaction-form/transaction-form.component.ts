@@ -47,21 +47,26 @@ export class TransactionFormComponent implements OnInit{
     this.transactionForm.value.CategoryId = +this.transactionForm.value.CategoryId;
     this.transactionForm.value.Amount = +this.transactionForm.value.Amount;
     this.transactionForm.value.UserId = this.commonService.getUserId();
-    console.log(this.transactionForm.value);
-    this.transactioService.addTransaction(this.transactionForm.value).
-    subscribe({
-      next:(res)=>{
-        console.log(res);
-        this.toastr.success('Added!', 'Your Transaction Has Successfully Added!');
-        this.IsLoading = false;
-        this.transactionForm.reset()
-      },
-      error: (err)=>{
-        console.log(err);
-        this.toastr.success('Error!', 'Your Transaction Has Faced Some Error!');
-      }
+    console.log(this.transactionForm.value, this.transactionForm.valid);
+    if(this.transactionForm.value.CategoryId !== null && this.transactionForm.value.Amount !== null && this.transactionForm.value.Description !== null){
+      this.transactioService.addTransaction(this.transactionForm.value).
+      subscribe({
+        next:(res)=>{
+          console.log(res);
+          this.toastr.success('Added!', 'Your Transaction Has Successfully Added!');
+          this.IsLoading = false;
+          this.transactionForm.reset()
+        },
+        error: (err)=>{
+          console.log(err);
+          this.toastr.success('Error!', 'Your Transaction Has Faced Some Error!');
+        }
 
-    })
+      })
+    }
+    else{
+      this.toastr.error("Kindly Enter all fields")
+    }
   }
 
   changeType(type:any){

@@ -41,6 +41,7 @@ export class LoginComponent implements OnInit {
   SignUpUser(){
     console.log(this.RegisterForm.value);
     if(this.RegisterForm.valid){
+      this.IsLoading = true;
       this.loginService.RegisterUser(this.RegisterForm.value).
       subscribe({
         next:(res)=>{
@@ -50,7 +51,12 @@ export class LoginComponent implements OnInit {
           if(this.signUpResult.isSuccess){
             console.log(res);
             this.toaster.success('You have successfully signup', 'Sucess!!')
+            this.IsLoading = false;
             this.RegisterForm.reset();
+          }
+          else{
+            this.IsLoading = false;
+            this.toaster.error(this.signUpResult.message);
           }
         }
       })

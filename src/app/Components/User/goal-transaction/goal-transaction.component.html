@@ -88,13 +88,13 @@
         </tr>
     </ng-template>
     <ng-template pTemplate="body" let-product>
-        <tr>
+        <tr class="text-decoration-line-through">
             <td>{{ product.goalName }}</td>
             <td>{{ product.deadlline }}</td>
             <td>{{ product.createdDate }}</td>
             <td>{{ product.updatedDate? product.updatedDate: '-' }}</td>
-            <td><button class="btn btn-success" (click)="EditGoal(product)">Edit</button></td>
-            <td><button class=" btn btn-danger" (click)="deleteGoal(product)">Delete</button></td>
+            <td><button class="btn btn-success" (click)="EditGoal(product)" [disabled]="true">Edit</button></td>
+            <td><button class=" btn btn-danger" (click)="deleteGoal(product)" [disabled]="true">Delete</button></td>
             <td><button type="button" class="btn btn-secondary" (click)="Done(product)" [disabled]="true">Done</button></td>
         </tr>
     </ng-template>

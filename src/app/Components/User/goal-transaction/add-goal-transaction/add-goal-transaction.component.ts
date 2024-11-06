@@ -45,22 +45,28 @@ export class AddGoalTransactionComponent implements OnInit{
     this.AddGoalForm.value.CreatedDate = this.CommonService.generateTodayDate();
 
     console.log(this.AddGoalForm.value);
-    this.goalService.addGoal(this.AddGoalForm.value).
-    subscribe({
-      next:(res)=>{
-        console.log(res);
-        this.IsLoading = false;
-        this.toaster.success('Added', 'Successfully Added the Goal!');
-        this.config.data.getAllGoal();
-        this.ref.close()
-      },
-      error: (err)=>{
-        console.log(err);
-        this.IsLoading = false;
-        this.toaster.error('Error', 'There was some in Submitting the form!')
-        this.ref.close()
-      }
-    })
+    if(this.AddGoalForm.value.GoalName && this.AddGoalForm.value.Deadlline){
+      this.goalService.addGoal(this.AddGoalForm.value).
+      subscribe({
+        next:(res)=>{
+          console.log(res);
+          this.IsLoading = false;
+          this.toaster.success('Added', 'Successfully Added the Goal!');
+          this.config.data.getAllGoal();
+          this.ref.close()
+        },
+        error: (err)=>{
+          console.log(err);
+          this.IsLoading = false;
+          this.toaster.error('Error', 'There was some in Submitting the form!')
+          this.ref.close()
+        }
+      })
 
-  }
+    }
+    else{
+      this.toaster.error("Kindly fill all fields")
+
+    }
+    }
 }

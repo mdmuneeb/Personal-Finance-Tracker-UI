@@ -1,4 +1,6 @@
-<section>
+<app-loader *ngIf="IsLoadingLoader"></app-loader>
+
+<section *ngIf="!IsLoadingLoader">
   <form [formGroup]="EditGoalForm">
 
     <div class="mb-3">
@@ -12,7 +14,7 @@
 
     <label class="fw-bold">Enter Amount</label>
     <div class="input-group mb-3 ">
-      <span class="input-group-text">$</span>
+      <span class="input-group-text">PKR</span>
       <input type="text" class="form-control" aria-label="Dollar amount (with dot and two decimal places)" formControlName="Deadlline">
     </div>
     <p

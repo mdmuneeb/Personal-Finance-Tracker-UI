@@ -4,11 +4,12 @@ import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { CommonServiceService } from '../../../../Services/Common/common-service.service';
 import { GoalServiceService } from '../../../../Services/Goal/goal-service.service';
+import { LoaderComponent } from "../../../Public/loader/loader.component";
 
 @Component({
   selector: 'app-edit-goal',
   standalone: true,
-  imports: [ReactiveFormsModule, CommonModule],
+  imports: [ReactiveFormsModule, CommonModule, LoaderComponent],
   templateUrl: './edit-goal.component.html',
   styleUrl: './edit-goal.component.scss'
 })
@@ -17,6 +18,7 @@ export class EditGoalComponent implements OnInit{
   EditGoalForm!: FormGroup;
   IsLoading = false;
   goalData:any;
+  IsLoadingLoader = false;
 
 
   constructor(
@@ -40,7 +42,13 @@ export class EditGoalComponent implements OnInit{
     console.log(this.config.data.product);
     console.log(this.config.data.getAllGoal);
     this.goalData = this.config.data.product;
-    this.getGoalData()
+
+    this.IsLoadingLoader = true;
+    setTimeout(()=>{
+      this.IsLoadingLoader = false
+      this.getGoalData()
+
+    }, 1000)
   }
 
   onSubmit(){
@@ -50,20 +58,22 @@ export class EditGoalComponent implements OnInit{
     this.EditGoalForm.value.CreatedDate = this.goalData.createdDate;
     this.EditGoalForm.value.UpdatedDate = this.CommonService.generateTodayDate();
     console.log(this.EditGoalForm.value);
-    this.goalService.editGoal(this.EditGoalForm.value).
-    subscribe({
-      next:(res)=>{
-        console.log(res);
-        this.config.data.getAllGoal()
-        this.IsLoading = false;
-        this.ref.close()
-      },
-      error: (err)=>{
-        console.log(err);
-        this.IsLoading = false;
-        this.ref.close()
-      }
-    })
+    // if(this.EditGoalForm.valid){
+      this.goalService.editGoal(this.EditGoalForm.value).
+      subscribe({
+        next:(res)=>{
+          console.log(res);
+          this.config.data.getAllGoal()
+          this.IsLoading = false;
+          this.ref.close()
+        },
+        error: (err)=>{
+          console.log(err);
+          this.IsLoading = false;
+          this.ref.close()
+        }
+      })
+    // }
   }
 
   getGoalData(){
