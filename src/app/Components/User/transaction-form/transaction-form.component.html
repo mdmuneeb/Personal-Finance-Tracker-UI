@@ -22,6 +22,9 @@
               </label>
             </div>
           </div>
+          <p
+          *ngIf="transactionForm.get('TransactionTypeId')?.hasError('required') && transactionForm.get('TransactionTypeId')?.touched"
+          class="text-danger ">kindly enter the Transaction Type </p>
         </div>
 
         <!-- Category Select -->
@@ -31,6 +34,9 @@
             <option selected>None</option>
             <option [value]="i.categoryId" *ngFor="let i of incomeCategory">{{i.categoryName}}</option>
           </select>
+          <p
+          *ngIf="transactionForm.get('CategoryId')?.hasError('required') && transactionForm.get('CategoryId')?.touched"
+          class="text-danger ">Kindly enter Category</p>
         </div>
 
         <div class="mt-3" *ngIf="categoryTypeExpense">
@@ -39,6 +45,9 @@
             <option selected>None</option>
             <option [value]="i.categoryId" *ngFor="let i of expenseCategory">{{i.categoryName}}</option>
           </select>
+          <p
+          *ngIf="transactionForm.get('CategoryId')?.hasError('required') && transactionForm.get('CategoryId')?.touched"
+          class="text-danger ">kindly enter the Category</p>
         </div>
 
         <!-- Amount Input -->
@@ -48,6 +57,9 @@
             <span class="input-group-text">PKR</span>
             <input id="amount-input" type="text" placeholder="Enter Amount" class="form-control" aria-label="Dollar amount (with dot and two decimal places)" formControlName="Amount">
           </div>
+          <p
+          *ngIf="transactionForm.get('Amount')?.hasError('required') && transactionForm.get('Amount')?.touched"
+          class="text-danger ">Kindly enter the Amount</p>
         </div>
 
 
@@ -58,6 +70,9 @@
             <textarea id="description-textarea" class="form-control" placeholder="Enter Description" style="height: 100px;" formControlName="Description"></textarea>
           </div>
         </div>
+        <p
+        *ngIf="transactionForm.get('Description')?.hasError('required') && transactionForm.get('Description')?.touched"
+        class="text-danger ">Kindly enter the Description</p>
         <div class="mt-3 d-flex justify-content-end">
           <button class="btn btn bg-warning" (click)="submitForm()">Submit</button>
         </div>

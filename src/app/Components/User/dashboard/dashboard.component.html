@@ -59,8 +59,8 @@
 
 
   <!-- Income and Expense Pie Charts -->
-  <div class="d-flex flex-wrap justify-content-between mt-5">
-    <div id="chartIncome" class="d-flex justify-content-center flex-column" style="width: 100%; height: auto;">
+  <div class="d-flex flex-wrap justify-content-around mt-5">
+    <div id="chartIncome" class="d-flex justify-content-center flex-column" >
       <h2 class="text-center text-decoration-underline">Income</h2>
       <apx-chart
         [series]="chartOptionsIncome.series2"
@@ -70,7 +70,7 @@
       ></apx-chart>
     </div>
 
-    <div id="chartExpense" class="d-flex justify-content-center flex-column" style="width: 100%; height: auto;">
+    <div id="chartExpense" class="d-flex justify-content-center flex-column" >
       <h2 class="text-center text-decoration-underline">Expense</h2>
       <apx-chart
         [series]="chartOptionsExpense.series2"
