@@ -1,15 +1,14 @@
 import { HttpErrorResponse, HttpInterceptorFn } from '@angular/common/http';
 import { inject } from '@angular/core';
 import { Router } from '@angular/router';
+import { HttpHeaders } from '@angular/common/http';
 import { catchError, throwError } from 'rxjs';
 
 export const loggerInterceptor: HttpInterceptorFn = (req, next) => {
-  // console.log(`Interceptor ${req.url}`);
   let tokenData;
   const router = inject(Router);
 
   if (typeof window !== 'undefined') {
-    // tokenData = sessionStorage.getItem("userData");
     try {
       tokenData = sessionStorage.getItem("userData");
     } catch (error) {
@@ -17,11 +16,9 @@ export const loggerInterceptor: HttpInterceptorFn = (req, next) => {
     }
   }
 
-  // let token = tokenData?JSON.parse(tokenData): null;
   let token = tokenData ? JSON.parse(tokenData) : null;
   const authToken = token?.token;
   console.log(authToken);
-
 
   if (!authToken) {
     console.error('Token is null or invalid');
@@ -33,25 +30,21 @@ export const loggerInterceptor: HttpInterceptorFn = (req, next) => {
     return next(req);
   }
 
-  // if(token){
-  const authReq = req.clone({
-    headers: req.headers.set('Authorization', `Bearer ${token.token}`)
-  })
-  // return next(authReq);
-  // }
-  //   else {
-  //     console.error('Token is null or invalid');
-  //     return next(req);
-  //   }
+  // Add both Authorization and custom headers
+  const headers = new HttpHeaders({
+    'Authorization': `Bearer ${authToken}`,
+    'ngrok-skip-browser-warning': '69420'
+  });
+
+  const authReq = req.clone({ headers });
 
   return next(authReq).pipe(
     catchError((error: HttpErrorResponse) => {
       if (error.status === 401) {
         console.error('Token expired or unauthorized. Redirecting to login.');
-        // Navigate to login page
         router.navigate(['/login']);
       }
-      return throwError(() => error); // Rethrow the error after handling
+      return throwError(() => error);
     })
   );
 }
