@@ -8,6 +8,8 @@ export const loggerInterceptor: HttpInterceptorFn = (req, next) => {
   let tokenData;
   const router = inject(Router);
 
+  let headers = req.headers.set('ngrok-skip-browser-warning', '69420');
+
   if (typeof window !== 'undefined') {
     try {
       tokenData = sessionStorage.getItem("userData");
@@ -21,19 +23,30 @@ export const loggerInterceptor: HttpInterceptorFn = (req, next) => {
   console.log(authToken);
 
   if (!authToken) {
+    // const headers = new HttpHeaders({
+    //   'ngrok-skip-browser-warning': '69420'
+    // });
+    // req.clone({ headers });
     return next(req);
+  }
+  if (authToken) {
+    headers = headers.set('Authorization', `Bearer ${authToken}`);
   }
 
   const skipIntercept = ['/refreshToken', '/login'].some(url => req.url.includes(url));
   if (skipIntercept) {
+    // const headers = new HttpHeaders({
+    //   'ngrok-skip-browser-warning': '69420'
+    // });
+    // req.clone({ headers });
     return next(req);
   }
 
   // Add both Authorization and custom headers
-  const headers = new HttpHeaders({
-    'Authorization': `Bearer ${authToken}`,
-    'ngrok-skip-browser-warning': '69420'
-  });
+  // const headers = new HttpHeaders({
+  //   'Authorization': `Bearer ${authToken}`,
+  //   'ngrok-skip-browser-warning': '69420'
+  // });
 
   const authReq = req.clone({ headers });
 
