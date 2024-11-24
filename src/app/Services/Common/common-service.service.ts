@@ -25,16 +25,20 @@ export class CommonServiceService {
     if (typeof window !== 'undefined'){
       let userId:any;
       userId = sessionStorage.getItem("userData");
-      userId = JSON.parse(userId);
-      return userId.userId;
+      if(userId){
+        userId = JSON.parse(userId);
+        return userId?.userId || null;
+      }
     }
   }
   getUserName(){
     if (typeof window !== 'undefined'){
       let userId:any;
       userId = sessionStorage.getItem("userData");
-      userId = JSON.parse(userId);
-      return userId.userName;
+      if(userId){
+        userId = JSON.parse(userId);
+        return userId?.userName || null;
+      }
     }
   }
 

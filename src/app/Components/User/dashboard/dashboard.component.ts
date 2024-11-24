@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { CardModule } from 'primeng/card';
 import {
   ChartComponent,
@@ -48,7 +48,7 @@ export type ChartOptions = {
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss']
 })
-export class DashboardComponent implements OnInit {
+export class DashboardComponent implements OnInit{
   @ViewChild("chart") chart!: ChartComponent;
   public chartOptions: Partial<ChartOptions>;
 
@@ -197,7 +197,9 @@ export class DashboardComponent implements OnInit {
             };
 
             // Update chart options
-            this.chart.updateOptions(this.chartOptions);
+            if(this.chart && this.chart.updateOptions){
+              this.chart.updateOptions(this.chartOptions);
+            }
         }
 
 
@@ -247,20 +249,21 @@ export class DashboardComponent implements OnInit {
     // this.chartIncome.updateOptions(this.chartOptionsIncome);
     // this.chartExpense.updateOptions(this.chartOptionsExpense);
 
-    if (this.chartIncome) {
-      this.chartIncome.updateOptions(this.chartOptionsIncome);
-  } else {
-      console.error('chartIncome is undefined');
-  }
+    setTimeout(()=>{
+      if (this.chartIncome) {
+        this.chartIncome.updateOptions(this.chartOptionsIncome);
+    } else {
+        // console.error('chartIncome is undefined');
+    }
 
-  if (this.chartExpense) {
-      this.chartExpense.updateOptions(this.chartOptionsExpense);
-  } else {
-      console.error('chartExpense is undefined');
-  }
+    if (this.chartExpense) {
+        this.chartExpense.updateOptions(this.chartOptionsExpense);
+    } else {
+        // console.error('chartExpense is undefined');
+    }
 
-    console.log(this.RentalIcome);
-    console.log(this.Salary);
+      console.log(this.RentalIcome);
+      console.log(this.Salary);
+    }, 3000)
   }
-
 }

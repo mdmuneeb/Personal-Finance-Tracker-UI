@@ -12,7 +12,7 @@ export const loggerInterceptor: HttpInterceptorFn = (req, next) => {
     try {
       tokenData = sessionStorage.getItem("userData");
     } catch (error) {
-      console.error('Error accessing sessionStorage:', error);
+      console.log('Error accessing sessionStorage:', error);
     }
   }
 
@@ -21,7 +21,6 @@ export const loggerInterceptor: HttpInterceptorFn = (req, next) => {
   console.log(authToken);
 
   if (!authToken) {
-    console.error('Token is null or invalid');
     return next(req);
   }
 
@@ -41,8 +40,8 @@ export const loggerInterceptor: HttpInterceptorFn = (req, next) => {
   return next(authReq).pipe(
     catchError((error: HttpErrorResponse) => {
       if (error.status === 401) {
-        console.error('Token expired or unauthorized. Redirecting to login.');
-        router.navigate(['/login']);
+        console.log('Token expired or unauthorized. Redirecting to login.');
+        router.navigate(['/loginPage']);
       }
       return throwError(() => error);
     })
