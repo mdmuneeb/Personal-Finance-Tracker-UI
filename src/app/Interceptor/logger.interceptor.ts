@@ -5,58 +5,50 @@ import { HttpHeaders } from '@angular/common/http';
 import { catchError, throwError } from 'rxjs';
 
 export const loggerInterceptor: HttpInterceptorFn = (req, next) => {
-  let tokenData;
   const router = inject(Router);
 
+  // Add the 'ngrok-skip-browser-warning' header to every request
   let headers = req.headers.set('ngrok-skip-browser-warning', '69420');
 
-  if (typeof window !== 'undefined') {
-    try {
-      tokenData = sessionStorage.getItem("userData");
-    } catch (error) {
-      console.log('Error accessing sessionStorage:', error);
-    }
+  // Retrieve token from sessionStorage
+  let tokenData;
+  let token;
+  let authToken;
+  try {
+    tokenData = sessionStorage.getItem('userData');
+  } catch (error) {
+    console.error('Error accessing sessionStorage:', error);
+  }
+  if (typeof window !== 'undefined'){
+
+    token = tokenData ? JSON.parse(tokenData) : null;
+    authToken = token?.token;
   }
 
-  let token = tokenData ? JSON.parse(tokenData) : null;
-  const authToken = token?.token;
-  console.log(authToken);
+  console.log('Auth Token:', authToken);  // Log token for debugging
 
-  if (!authToken) {
-    // const headers = new HttpHeaders({
-    //   'ngrok-skip-browser-warning': '69420'
-    // });
-    // req.clone({ headers });
-    return next(req);
-  }
+  // If there's an authToken, add it to the headers
   if (authToken) {
     headers = headers.set('Authorization', `Bearer ${authToken}`);
   }
 
-  const skipIntercept = ['/refreshToken', '/login'].some(url => req.url.includes(url));
-  if (skipIntercept) {
-    // const headers = new HttpHeaders({
-    //   'ngrok-skip-browser-warning': '69420'
-    // });
-    // req.clone({ headers });
-    return next(req);
-  }
+  // Log the final headers and request URL for debugging
+  console.log('Request URL:', req.url);
+  console.log('Request Headers:', headers);
 
-  // Add both Authorization and custom headers
-  // const headers = new HttpHeaders({
-  //   'Authorization': `Bearer ${authToken}`,
-  //   'ngrok-skip-browser-warning': '69420'
-  // });
-
+  // Clone the request with the updated headers
   const authReq = req.clone({ headers });
 
+  // Proceed with the request
   return next(authReq).pipe(
     catchError((error: HttpErrorResponse) => {
       if (error.status === 401) {
         console.log('Token expired or unauthorized. Redirecting to login.');
         router.navigate(['/loginPage']);
       }
+      // Log the error for debugging
+      console.error('Request error:', error);
       return throwError(() => error);
     })
   );
-}
+};
