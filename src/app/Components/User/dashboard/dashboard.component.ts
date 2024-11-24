@@ -128,7 +128,9 @@ export class DashboardComponent implements OnInit{
   }
 
   ngOnInit(): void {
-    this.getTransactionsById();
+    setTimeout(()=>{
+      this.getTransactionsById();
+    }, 2000)
   }
 
   gettotalIncomeExpense(list:any){
